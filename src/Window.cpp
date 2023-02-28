@@ -36,6 +36,10 @@ Window::~Window() {
 }
 
 void Window::render(std::shared_ptr<Renderer> renderer, const std::vector<Mesh>& scene, Camera* camera) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+
 	while (!glfwWindowShouldClose(window)) {
 		for (const auto& mesh : scene) {
 			renderer->render(mesh,camera);

@@ -49,11 +49,7 @@ Renderer::Renderer() {
 void Renderer::render(const Mesh& mesh, Camera* camera) const {
 	glViewport(camera->viewport.x, camera->viewport.y, camera->viewport.z, camera->viewport.w);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glClearColor(0.f, 0.f, 0.f, 1.f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	// bind pipeline
 	glBindProgramPipeline(mesh.pipeline);
