@@ -35,14 +35,43 @@ Window::~Window() {
 	glfwTerminate();
 }
 
-void Window::render(std::shared_ptr<Renderer> renderer, const std::vector<Mesh>& scene, Camera* camera) {
+void Window::handleMouseEvents(OrbitCamera* camera) {
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+		if (!isMousedown) {
+			isMousedown = true;
+			double mousex;
+			double mousey;
+			glfwGetCursorPos(window, &mousex, &mousey);
+			startPos = glm::vec2(mousex, mousey);
+		}
+		double mousex;
+		double mousey;
+		glfwGetCursorPos(window,&mousex, &mousey);
+		glm::vec2 endPos = glm::vec2(mousex, mousey);
+		glm::vec2 offset = endPos - startPos;
+		
+		camera->rotateAzimuth(offset.x * 0.01f);
+		camera->rotatePolar(offset.y * 0.01f);
+		camera->setViewMatrix();
+
+		startPos = endPos;
+	}
+	else {
+		isMousedown = false;
+	}
+}
+
+void Window::render(std::shared_ptr<Renderer> renderer, const std::vector<Mesh>& scene, OrbitCamera* camera) {
+	glViewport(camera->viewport.x, camera->viewport.y, camera->viewport.z, camera->viewport.w);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 
 	while (!glfwWindowShouldClose(window)) {
+		handleMouseEvents(camera);
+
 		for (const auto& mesh : scene) {
-			renderer->render(mesh,camera);
+			renderer->render(mesh, camera);
 		}
 		glfwSwapBuffers(window);
 		glfwPollEvents();

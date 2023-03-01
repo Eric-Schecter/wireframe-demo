@@ -2,7 +2,7 @@
 
 #include "Renderer.h"
 #include "Window.h"
-#include "Camera.h"
+#include "OrbitCamera.h"
 
 #include <memory>
 #include <vector>
@@ -23,7 +23,7 @@ private:
 
 	Window* window;
 	std::shared_ptr<Renderer> renderer;
-	Camera* camera;
+	OrbitCamera* camera;
 	std::vector<Mesh> scene;
 };
 

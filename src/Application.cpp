@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <glm/vec3.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/ext/scalar_constants.hpp>
 
 #include "Renderer.h"
 #include "Mesh.h"
@@ -32,10 +33,11 @@ void Application::initScene() {
 	const float aspect = static_cast<float>(window->width) / window->height;
 	const float near = 0.1f;
 	const float far = 1000.f;
-	camera = new Camera();
-	camera->pos = glm::vec3(4.f, 4.f, 8.f);
+	glm::vec3 target(0.f, 0.f, 0.f);
+	glm::vec3 up(0.f, 1.f, 0.f);
+	camera = new OrbitCamera(target,up,8.f,glm::pi<float>()/4.f, glm::pi<float>() / 8.f);
 	camera
-		->setView(glm::vec3(0.f, 0.f, 0.f))
+		->setViewMatrix()
 		->setProjection(fov, aspect, near, far)
 		->setViewport(0, 0, window->width, window->height);
 

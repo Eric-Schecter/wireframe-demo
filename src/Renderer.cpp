@@ -47,14 +47,14 @@ Renderer::Renderer() {
 }
 
 void Renderer::render(const Mesh& mesh, Camera* camera) const {
-	glViewport(camera->viewport.x, camera->viewport.y, camera->viewport.z, camera->viewport.w);
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// bind pipeline
 	glBindProgramPipeline(mesh.pipeline);
 	// set vertex data
 	glBindVertexArray(mesh.vao);
+	// update uniforms
+	mesh.updateUniformsDSA(camera);
 	// draw
 	glDrawArrays(GL_TRIANGLES, 0, mesh.vertices.size()/3);
 	// reset	
