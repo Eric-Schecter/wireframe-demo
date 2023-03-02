@@ -67,5 +67,6 @@
     <None Include="shaders\wireframe.frag" />
     <None Include="shaders\wireframe.vert" />
     <None Include="README.md" />
+    <None Include="shaders\wireframe.geom" />
   </ItemGroup>
 </Project>

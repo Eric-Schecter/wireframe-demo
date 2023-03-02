@@ -66,9 +66,10 @@ void Mesh::setupVertex() {
 	glEnableVertexArrayAttrib(vao, 1);
 }
 
-void Mesh::setupProgram(std::string VERTEX_SHADER_PATH, std::string FRAGMENT_SHADER_PATH) {
+void Mesh::setupProgram(std::string VERTEX_SHADER_PATH, std::string GEOMETRY_SHADER_PATH, std::string FRAGMENT_SHADER_PATH) {
 	ShaderInfoPipeline shaders[] = {
 	 {GL_VERTEX_SHADER,   GL_VERTEX_SHADER_BIT, VERTEX_SHADER_PATH.c_str(), &vertProg},
+	 {GL_GEOMETRY_SHADER, GL_GEOMETRY_SHADER_BIT, GEOMETRY_SHADER_PATH.c_str(), &gemoProg},
 	 {GL_FRAGMENT_SHADER, GL_FRAGMENT_SHADER_BIT, FRAGMENT_SHADER_PATH.c_str(), &fragProg},
 	 {GL_NONE,            GL_NONE, nullptr, 0}
 	};

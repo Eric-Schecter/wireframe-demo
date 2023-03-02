@@ -65,7 +65,7 @@ void Window::render(std::shared_ptr<Renderer> renderer, const std::vector<Mesh>&
 	glViewport(camera->viewport.x, camera->viewport.y, camera->viewport.z, camera->viewport.w);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glClearColor(0.f, 0.f, 0.f, 1.f);
+	glClearColor(1.f, 1.f, 1.f, 1.f);
 
 	while (!glfwWindowShouldClose(window)) {
 		handleMouseEvents(camera);

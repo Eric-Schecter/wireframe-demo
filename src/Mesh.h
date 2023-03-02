@@ -18,7 +18,7 @@ class Mesh
 {
 public:
 	void setupVertex();
-	void setupProgram(std::string vertexPath,std::string fragmentPath);
+	void setupProgram(std::string vertexPath, std::string geometryPath, std::string fragmentPath);
 	void setupUniforms(Camera* camera);
 	void setupUniformTable(GLuint program, std::unordered_map<std::string, UniformInfo>& uniforms);
 	void updateUniformsDSA(Camera* camera) const;
@@ -28,6 +28,7 @@ public:
 	// spread programs
 	GLuint pipeline = 0;
 	GLuint vertProg = 0;
+	GLuint gemoProg = 0;
 	GLuint fragProg = 0;
 
 	std::vector<float> vertices;

@@ -42,11 +42,13 @@ void Application::initScene() {
 		->setViewport(0, 0, window->width, window->height);
 
 	const std::string VERTEX_SHADER_PATH = "./shaders/wireframe.vert";
+	const std::string GEOMETRY_SHADER_PATH = "./shaders/wireframe.geom";
 	const std::string FRAGMENT_SHADER_PATH = "./shaders/wireframe.frag";
 	Mesh mesh;
 	mesh.setupVertex();
 	mesh.setupProgram(
 		VERTEX_SHADER_PATH,
+		GEOMETRY_SHADER_PATH,
 		FRAGMENT_SHADER_PATH
 	);
 	mesh.setupUniforms(camera);

@@ -160,6 +160,7 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include="shaders\wireframe.frag" />
+    <None Include="shaders\wireframe.geom" />
     <None Include="shaders\wireframe.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
