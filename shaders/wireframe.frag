@@ -6,7 +6,7 @@ in GS_FS_INTERFACE
 } fs_in;
 
 const float lineWidth=2.;
-const vec3 color = vec3(1.f,0.f,0.f);
+const vec3 color = vec3(1.f,0.64f,0.f);
 
 out vec4 fColor;
 

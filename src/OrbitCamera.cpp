@@ -43,7 +43,6 @@ OrbitCamera* OrbitCamera::zoom(const float by) {
 }
 
 OrbitCamera* OrbitCamera::moveHorizontal(const float distance) {
-	//const auto pos = getEye();
 	const glm::vec3 viewDir = getNormalizedViewVector();
 	const glm::vec3 strafeDir = glm::normalize(glm::cross(viewDir,up));
 	_center += strafeDir * distance;
