@@ -7,8 +7,6 @@ uniform mat4 uViewMatrix;
 uniform mat4 uProjectionMatrix;
 uniform mat4 uModelMatrix;
 
-out vec3 vBarycentric;
-
 // explicitly declare when use program pipeline
 out gl_PerVertex
 {
@@ -17,7 +15,12 @@ out gl_PerVertex
   float gl_ClipDistance[];
 };  
 
+out VS_GS_INTERFACE
+{
+  vec3 barycentric;
+} vs_out;
+
 void main() {
-    vBarycentric = aBarycentric;
+    vs_out.barycentric = aBarycentric;
     gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aPosition,1.f);
 }

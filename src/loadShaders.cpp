@@ -141,9 +141,17 @@ LoadShadersPipeline(ShaderInfoPipeline* shaders, const GLchar** feedbackVaryings
     while (entry->type != GL_NONE) {
         const GLchar* source = ReadShader(entry->filename);
 
-        // generate, init, compile, link shader program
+        // generate, init, compile, link shader program, set program parameter to seperated
         GLuint program = glCreateShaderProgramv(entry->type, 1, &source);
         *(entry->program) = program;
+
+        GLint linked;
+        glGetProgramiv(program,GL_LINK_STATUS, &linked);
+        if (!linked) {
+            char message[1024];
+            glGetProgramInfoLog(program, sizeof(message), nullptr, message);
+            std::cout << message << "\n";
+        }
 
         glUseProgramStages(pipeline, entry->bit, *(entry->program));
 

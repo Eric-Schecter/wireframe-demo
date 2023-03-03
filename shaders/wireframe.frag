@@ -1,6 +1,10 @@
 #version 460
 
-in vec3 vBarycentric;
+in GS_FS_INTERFACE
+{
+  vec3 barycentric;
+} fs_in;
+
 const float lineWidth=2.;
 const vec3 color = vec3(1.f,0.f,0.f);
 
@@ -13,6 +17,6 @@ float computeAlpha(vec3 barycentric){
 }
 
 void main() {
-    float alpha = computeAlpha(vBarycentric);
+    float alpha = computeAlpha(fs_in.barycentric);
     fColor = vec4(color,alpha);
 } 
