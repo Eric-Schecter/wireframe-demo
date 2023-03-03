@@ -32,6 +32,7 @@ public:
 	GLuint fragProg = 0;
 
 	std::vector<float> vertices;
+	std::vector<uint32_t> indices;
 	glm::mat4 modelMatrix = glm::mat4(1.f);
 
 	// unidforms

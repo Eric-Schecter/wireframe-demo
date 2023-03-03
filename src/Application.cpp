@@ -35,7 +35,7 @@ void Application::initScene() {
 	const float far = 1000.f;
 	glm::vec3 target(0.f, 0.f, 0.f);
 	glm::vec3 up(0.f, 1.f, 0.f);
-	camera = new OrbitCamera(target,up,8.f,glm::pi<float>()/4.f, glm::pi<float>() / 8.f);
+	camera = new OrbitCamera(target,up,8.f,glm::pi<float>()/3.f, glm::pi<float>() / 8.f);
 	camera
 		->setViewMatrix()
 		->setProjection(fov, aspect, near, far)

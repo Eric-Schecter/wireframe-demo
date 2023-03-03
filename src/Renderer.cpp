@@ -56,7 +56,7 @@ void Renderer::render(const Mesh& mesh, Camera* camera) const {
 	// update uniforms
 	mesh.updateUniformsDSA(camera);
 	// draw
-	glDrawArrays(GL_TRIANGLES, 0, mesh.vertices.size()/3);
+	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 	// reset	
 	glBindVertexArray(0);
 	glUseProgram(0);

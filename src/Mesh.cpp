@@ -9,33 +9,48 @@
 
 void Mesh::setupVertex() {
 	vertices = {
-		1, 1, 1, 1, -1, 1, 1, 1, -1,
-		1, -1, 1, 1, -1, -1, 1, 1, -1,
-		-1, 1, -1, -1, -1, -1, -1, 1, 1,
-		-1, -1, -1, -1, -1, 1, -1, 1, 1,
-		-1, 1, -1, -1, 1, 1, 1, 1, -1,
-		-1, 1, 1, 1, 1, 1, 1, 1, -1,
-		-1, -1, 1, -1, -1, -1, 1, -1, 1,
-		-1, -1, -1, 1, -1, -1, 1, -1, 1,
-		-1, 1, 1, -1, -1, 1, 1, 1, 1,
-		-1, -1, 1, 1, -1, 1, 1, 1, 1,
-		1, 1, -1, 1, -1, -1, -1, 1, -1,
-		1, -1, -1, -1, -1, -1, -1, 1, -1
+		0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5,
+		0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5,
+		-0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 
+		0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+		-0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5,
+		0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+		-0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5,
+		-0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5
+	};
+
+	indices = {
+		0, 2, 1,
+		2, 3, 1,
+		4, 6, 5,
+		6, 7, 5,
+		8, 10, 9,
+		10, 11, 9,
+		12, 14, 13,
+		14, 15, 13,
+		16, 18, 17,
+		18, 19, 17,
+		20, 22, 21,
+		22, 23, 21
 	};
 
 	// DSA style
 	GLuint vbo;
+	GLuint ibo;
 	// init and bind buffer
 	// glCreate* = glGen* + glBindBuffer
 	glCreateVertexArrays(1, &vao);
 	glCreateBuffers(1, &vbo);
+	glCreateBuffers(1, &ibo);
 	// pass data from cpu to buffer	
 	// glNamedBufferData = glBufferData
 	// get buffer target type by buffer itself
 	glNamedBufferData(vbo, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+	glNamedBufferData(ibo, sizeof(uint32_t) * indices.size(), indices.data(), GL_STATIC_DRAW);
 	// bind buffer to variable in gpu
 	// glVertexArrayVertexBuffer + glVertexArrayAttribFormat = glVertexAttribPointer + vao bind
 	glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(float) * 3);
+	glVertexArrayElementBuffer(vao, ibo);
 
 	glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
 
