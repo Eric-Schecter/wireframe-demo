@@ -16,11 +16,6 @@ out gl_PerVertex {
   float gl_ClipDistance[];
 };
 
-in VS_GS_INTERFACE
-{
-  vec3 barycentric;
-} my_gs_in[];
-
 out GS_FS_INTERFACE
 {
   vec3 barycentric;
@@ -29,7 +24,7 @@ out GS_FS_INTERFACE
 void main(){
 	for(int i =0;i<gl_in.length();i++){
 		gl_Position =gl_in[i].gl_Position;
-		my_gs_out.barycentric = my_gs_in[i].barycentric;
+		my_gs_out.barycentric = vec3(i%3== 0 ? 1 : 0,i%3==1 ? 1 : 0,i%3==2 ? 1 : 0);
 		EmitVertex();
 	}
 	EndPrimitive();

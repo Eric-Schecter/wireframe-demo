@@ -23,47 +23,27 @@ void Mesh::setupVertex() {
 		1, -1, -1, -1, -1, -1, -1, 1, -1
 	};
 
-	std::vector<float> barycentrics;
-	for (int i = 0; i < vertices.size(); i += 9) {
-		barycentrics.push_back(1);
-		barycentrics.push_back(0);
-		barycentrics.push_back(0);
-
-		barycentrics.push_back(0);
-		barycentrics.push_back(1);
-		barycentrics.push_back(0);
-
-		barycentrics.push_back(0);
-		barycentrics.push_back(0);
-		barycentrics.push_back(1);
-	}
-
 	// DSA style
-	GLuint vbos[2];
+	GLuint vbo;
 	// init and bind buffer
 	// glCreate* = glGen* + glBindBuffer
 	glCreateVertexArrays(1, &vao);
-	glCreateBuffers(2, vbos);
+	glCreateBuffers(1, &vbo);
 	// pass data from cpu to buffer	
 	// glNamedBufferData = glBufferData
 	// get buffer target type by buffer itself
-	glNamedBufferData(vbos[0], sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glNamedBufferData(vbos[1], sizeof(float) * barycentrics.size(), barycentrics.data(), GL_STATIC_DRAW);
+	glNamedBufferData(vbo, sizeof(float) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 	// bind buffer to variable in gpu
 	// glVertexArrayVertexBuffer + glVertexArrayAttribFormat = glVertexAttribPointer + vao bind
-	glVertexArrayVertexBuffer(vao, 0, vbos[0], 0, sizeof(float) * 3);
-	glVertexArrayVertexBuffer(vao, 2, vbos[1], 0, sizeof(float) * 3);
+	glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(float) * 3);
 
 	glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
-	glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
 
 	glVertexArrayAttribBinding(vao, 0, 0);
-	glVertexArrayAttribBinding(vao, 1, 2);
 
 	// enable variable
 	// glEnableVertexArrayAttrib(DSA) = glEnableVertexAttribArray(VAO)
 	glEnableVertexArrayAttrib(vao, 0);
-	glEnableVertexArrayAttrib(vao, 1);
 }
 
 void Mesh::setupProgram(std::string VERTEX_SHADER_PATH, std::string GEOMETRY_SHADER_PATH, std::string FRAGMENT_SHADER_PATH) {
